@@ -24,10 +24,10 @@ class R10K::Git::ShellGit::BareRepository < R10K::Git::ShellGit::BaseRepository
     proxy = R10K::Git.get_proxy_for_remote(remote)
 
     # set git config
-    git ['config', '--global', 'core.autocrlf', 'false']
+    # git ['config', '--global', 'core.autocrlf', 'false']
 
     R10K::Git.with_proxy(proxy) do
-      git ['clone', '--mirror', remote, git_dir.to_s]
+      git ['clone', '--config', 'core.autocrlf=false', '--mirror', remote, git_dir.to_s]
     end
   end
 
