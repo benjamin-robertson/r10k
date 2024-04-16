@@ -45,7 +45,7 @@ class R10K::Git::Alternates
     if ! @file.parent.directory?
       raise R10K::Git::GitError, _("Cannot write %{file}; parent directory does not exist") % {file: @file}
     end
-    @file.open("w") do |fh|
+    @file.open("wb") do |fh|
       entries.each do |entry|
         fh.puts(entry)
       end
