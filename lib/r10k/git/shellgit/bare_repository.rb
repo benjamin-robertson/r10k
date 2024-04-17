@@ -33,7 +33,7 @@ class R10K::Git::ShellGit::BareRepository < R10K::Git::ShellGit::BaseRepository
     proxy = R10K::Git.get_proxy_for_remote(remote)
 
     R10K::Git.with_proxy(proxy) do
-      git ['config', '--global', 'core.autocrlf', 'false']
+      # git ['config', '--global', 'core.autocrlf', 'false'] Disable setting global config option.
       git ['fetch', remote_name, '--prune'], :git_dir => git_dir.to_s
     end
   end
