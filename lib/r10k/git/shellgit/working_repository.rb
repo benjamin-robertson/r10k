@@ -28,7 +28,11 @@ class R10K::Git::ShellGit::WorkingRepository < R10K::Git::ShellGit::BaseReposito
   #
   # @return [void]
   def clone(remote, opts = {})
-    argv = ['clone', '--config', 'core.autocrlf=false', remote, @path.to_s]
+    if Gem.win_platform?
+      argv = ['clone', '--config', 'core.autocrlf=false', remote, @path.to_s]
+    else
+      argv = ['clone', remote, @path.to_s]
+    end
     if opts[:reference]
       argv += ['--reference', opts[:reference]]
     end
