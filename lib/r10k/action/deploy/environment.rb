@@ -198,7 +198,7 @@ module R10K
           # make this file write as atomic as possible in pure ruby
           final   = "#{environment.path}/.r10k-deploy.json"
           staging = "#{environment.path}/.r10k-deploy.json~"
-          File.open(staging, 'w') do |f|
+          File.open(staging, 'wb') do |f|
             deploy_info = environment.info.merge({
               :started_at => started_at,
               :finished_at => Time.new,

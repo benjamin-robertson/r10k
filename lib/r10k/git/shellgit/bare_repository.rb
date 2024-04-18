@@ -24,7 +24,11 @@ class R10K::Git::ShellGit::BareRepository < R10K::Git::ShellGit::BaseRepository
     proxy = R10K::Git.get_proxy_for_remote(remote)
 
     R10K::Git.with_proxy(proxy) do
-      git ['clone', '--mirror', remote, git_dir.to_s]
+      if Gem.win_platform?
+        git ['clone', '--config', 'core.autocrlf=false', '--mirror', remote, git_dir.to_s]
+      else
+        git ['clone', '--mirror', remote, git_dir.to_s]
+      end
     end
   end
 
